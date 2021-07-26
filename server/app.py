@@ -1,6 +1,7 @@
 import uuid
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import utils
 
 
 BOOKS = [
@@ -85,7 +86,11 @@ def single_book(book_id):
         response_object['message'] = 'Book removed!'
     return jsonify(response_object)
 
+@app.route('/stock/all_stock',methods=['GET', 'POST'])
+def all_stock():
+    response_object = {'status': 'success'}
+    response_object['data'] = utils.baostockApi().query_sz50_stocks()
+    return response_object
 
 if __name__ == '__main__':
     app.run()
-    # 注释
