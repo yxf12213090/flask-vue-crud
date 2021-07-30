@@ -88,8 +88,13 @@ def single_book(book_id):
 
 @app.route('/stock/all_stock',methods=['GET', 'POST'])
 def all_stock():
-    data = utils.baostockApi().query_sz50_stocks()
-    return data
+    data = []
+    sz50_stocks = utils.baostockApi().query_sz50_stocks()
+    for i in range(len(sz50_stocks)):
+        code = sz50_stocks.at[i, 'code']
+        data.append(code)
+    response = {'sz50': data}
+    return response
 
 if __name__ == '__main__':
     app.run()
