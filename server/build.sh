@@ -7,10 +7,11 @@ APP_PATH="/home/work/app/pythonapp"
 cp -r ../server/* ${APP_PATH}/${APP_NAME}
 cd ${APP_PATH}/${APP_NAME}
 
-python -m venv env
+python3 -m venv env
 source env/bin/activate
 pip install --upgrade pip
 pip install -r requirements1.txt
 chmod 775 supervisor.conf
+supervisorctl shutdown
 supervisord -c supervisor.conf
 echo "finished"
